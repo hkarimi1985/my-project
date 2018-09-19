@@ -6,7 +6,7 @@ class Employee:
     def __init__(self, first, last):
         self.first = first
         self.last = last
-        num_of_employees += 1
+        Employee.num_of_employees += 1
 
     @property
     def fullname(self):
@@ -19,7 +19,14 @@ class Employee:
     @classmethod
     def from_string(cls, emp_str):
         first, last = emp_str.split(' ')
-        return cls(first,last)
+        return cls(first, last)
+
+    def __str__(self):
+        return 'Employee: {} {}'.format(self.first, self.last)
+
+    @classmethod
+    def get_num_of_employee(cls):
+        print('Number of employees = {}'.format(cls.num_of_employees))
 
 
 class Developer(Employee):
@@ -34,3 +41,25 @@ class Developer(Employee):
         salary = int(salary)
         first, last = name.split(' ')
         return cls(first, last, salary)
+
+    def __str__(self):
+        msg = super().__str__() + ', salary={}'.format(self.salary)
+        return msg
+
+
+class Manager(Employee):
+
+    def __init__(self, first, last, emp_list=None):
+        Employee.__init__(self, first, last)
+        if emp_list is None:
+            self.emp_list = []
+        else:
+            self.emp_list = emp_list
+
+    def add_emp(self, emp):
+        for i in emp:
+            self.emp_list.append(i)
+
+    def __str__(self):
+        msg = super().__str__() + ' number of direct report = {}'.format(len(self.emp_list))
+        return msg
