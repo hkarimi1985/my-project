@@ -1,3 +1,20 @@
+import logging
+import time
+
+logging.basicConfig(filename="example.log", level=logging.DEBUG,
+                            format='%(asctime)s: %(filename)s: %(message)s')
+
+
+def LoggerDecorator(orig_func):
+    def wrapper(*args, **kwargs):
+        t1 = time.time()
+        result = orig_func(*args, **kwargs)
+        t2 = time.time() - t1
+        logging.info('running function \"{}\" , run_time = {}ms'.format(orig_func.__name__, t2*1000))
+        return result
+    return wrapper
+
+
 class Employee:
     ''' Defining an employee'''
 
@@ -17,6 +34,7 @@ class Employee:
         return self.first+'.'+self.last+'@hk.ai'
 
     @classmethod
+    @LoggerDecorator
     def from_string(cls, emp_str):
         first, last = emp_str.split(' ')
         return cls(first, last)
@@ -25,6 +43,7 @@ class Employee:
         return 'Employee: {} {}'.format(self.first, self.last)
 
     @classmethod
+    @LoggerDecorator
     def get_num_of_employee(cls):
         print('Number of employees = {}'.format(cls.num_of_employees))
 
@@ -56,6 +75,7 @@ class Manager(Employee):
         else:
             self.emp_list = emp_list
 
+    @LoggerDecorator
     def add_emp(self, emp):
         for i in emp:
             self.emp_list.append(i)
@@ -63,3 +83,7 @@ class Manager(Employee):
     def __str__(self):
         msg = super().__str__() + ' number of direct report = {}'.format(len(self.emp_list))
         return msg
+
+    @LoggerDecorator
+    def temp(self):
+        time.sleep(2)
