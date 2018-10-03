@@ -1,8 +1,14 @@
 import logging
 import time
-
-logging.basicConfig(filename="example.log", level=logging.DEBUG,
-                            format='%(asctime)s: %(filename)s: %(message)s')
+#
+# logging.basicConfig(filename="example.log", level=logging.DEBUG,
+#                             format='%(asctime)s: %(name)s: %(filename)s: %(message)s')
+logger = logging.getLogger('Employee')
+formatter = logging.Formatter('%(created)s: %(name)s: %(filename)s: %(message)s')
+f_handler = logging.FileHandler(filename='sample.log')
+logger.setLevel(logging.DEBUG)
+f_handler.setFormatter(formatter)
+logger.addHandler(f_handler)
 
 
 def LoggerDecorator(orig_func):
@@ -10,7 +16,7 @@ def LoggerDecorator(orig_func):
         t1 = time.time()
         result = orig_func(*args, **kwargs)
         t2 = time.time() - t1
-        logging.info('running function \"{}\" , run_time = {}ms'.format(orig_func.__name__, t2*1000))
+        logger.info('running function \"{}\" , run_time = {}ms'.format(orig_func.__name__, t2*1000))
         return result
     return wrapper
 

@@ -16,3 +16,9 @@
 2018-09-22 14:08:53,541: class_def.py: running function "add_emp" , run_time = 0.0ms
 2018-09-22 14:08:53,632: class_def.py: running function "get_num_of_employee" , run_time = 0.0ms
 2018-09-22 14:08:55,634: class_def.py: running function "temp" , run_time = 2001.0435581207275ms
+2018-09-22 16:27:28,065: class_def.py: running function "from_string" , run_time = 0.0ms
+2018-09-22 16:27:28,066: class_def.py: running function "from_string" , run_time = 0.0ms
+2018-09-22 16:27:28,066: class_def.py: running function "add_emp" , run_time = 0.0ms
+2018-09-23 13:45:02,071: root: class_def.py: running function "from_string" , run_time = 0.0ms
+2018-09-23 13:45:02,071: root: class_def.py: running function "from_string" , run_time = 0.0ms
+2018-09-23 13:45:02,072: root: class_def.py: running function "add_emp" , run_time = 0.0ms
